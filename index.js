@@ -18,7 +18,8 @@ app.get('/get-url/:id', async (req, res) => {
     //   type: "video+audio",
     //   format: "mp4"
     // })
-    // res.json({url: info.url}); 
+    // res.json({url: info.url});
+    return res.json({message: "iamhere"});
     const info = await ytdl.getInfo(req.params.id);
     return res.json(info.formats.filter(item => item.hasAudio && item.hasVideo)?.[0]?.url ?? '');
   } catch (error) {
