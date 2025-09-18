@@ -10,7 +10,9 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "@distube/ytdl-core": "^4.16.12",
     "express": "^5.1.0",
+    "patch-package": "^8.0.0",
     "youtubei.js": "^15.1.1"
   }
 }
