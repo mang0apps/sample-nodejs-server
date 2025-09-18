@@ -10,21 +10,16 @@ app.use(express.json());
 
 // Root route
 app.get('/get-url/:id', async (req, res) => {
-  try {
-    // const yt = await Innertube.create({ cache: new UniversalCache(false), generate_session_locally: true });
-    // const info = await yt.getStreamingData(req.params.id, {
-    //   // client: "YTMUSIC",
-    //   // itag: 18
-    //   type: "video+audio",
-    //   format: "mp4"
-    // })
-    // res.json({url: info.url});
-    return res.json({message: "iamhere"});
-    const info = await ytdl.getInfo(req.params.id);
-    return res.json(info.formats.filter(item => item.hasAudio && item.hasVideo)?.[0]?.url ?? '');
-  } catch (error) {
-    res.json({error})
-  }
+  // const info = await ytdl.getInfo(req.params.id);
+  // res.json(info.formats.filter(item => item.hasAudio && item.hasVideo)?.[0]?.url ?? '');
+  ytdl.getInfo(req.params.id)
+    .then(info => {
+      res.json(info.formats.filter(item => item.hasAudio && item.hasVideo)?.[0]?.url ?? '');
+    })
+    .catch(error => {
+      console.log(error);
+      res.send(error)
+    });
 });
 
 // Start server
